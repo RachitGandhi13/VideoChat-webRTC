@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import {connectToSocket} from "./controllers/socketManager.js";
 
 import cors from "cors";
+import userRoutes from "./routes/users.routes.js";
 
 const app= express();
 const server = createServer(app);
@@ -16,6 +17,8 @@ app.set("port", (process.env.PORT || 8000));
 app.use(cors());
 app.use(express.json({limit:"40Kb"}));
 app.use(express.urlencoded({limit:"40Kb", extended:true}));
+
+app.use("/api/v1/users", userRoutes);
 
 const start = async()=>{
     const connectionDb = await mongoose.connect("mongodb+srv://rachitgandhi138:R301118G@cluster0.wf0daln.mongodb.net/")
